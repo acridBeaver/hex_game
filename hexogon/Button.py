@@ -1,4 +1,4 @@
-from funcs import *
+from hexogon.funcs import *
 
 
 class Button:
@@ -11,9 +11,11 @@ class Button:
         if img:
             img_w, img_h = self.img.get_rect().size
             scale = self.size / img_w
-            self.smaller_img = pg.transform.scale(self.img, (int(img_w * scale), int(img_h * scale)))
+            self.smaller_img = pg.transform.scale(self.img,
+                                                  (int(img_w * scale), int(img_h * scale)))
             scale = (self.size + 5) / img_w
-            self.bigger_img = pg.transform.scale(self.img, (int(img_w * scale), int(img_h * scale)))
+            self.bigger_img = pg.transform.scale(self.img,
+                                                 (int(img_w * scale), int(img_h * scale)))
         if txt:
             self.rect = text_rect(txt, size)
         elif img:
