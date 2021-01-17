@@ -9,7 +9,6 @@ class Button:
         self.img = img
         self.original_size = self.size = size
         if img:
-            # create smaller and bigger copies of an image for highlighting
             img_w, img_h = self.img.get_rect().size
             scale = self.size / img_w
             self.smaller_img = pg.transform.scale(self.img, (int(img_w * scale), int(img_h * scale)))
@@ -21,14 +20,12 @@ class Button:
             self.rect = self.smaller_img.get_rect()
 
     def params(self):
-        '''returns the top left corner point'''
         return (self.pos[0] + self.rect.left - self.rect.width / 2,
                 self.pos[1] + self.rect.top - self.rect.height / 2,
                 self.rect.width,
                 self.rect.height)
 
     def highlighted(self):
-        '''is called if the mouse is above the button, changes the size of the mouse'''
         x, y, w, h = self.params()
         pos = pg.mouse.get_pos()
         if in_rect(Point(pos), x, y, w, h):
@@ -37,14 +34,13 @@ class Button:
             self.size = self.original_size
 
     def triggered(self, channel=None, sound=None, playing=False):
-        '''returns True if the button is pressed'''
         x, y, w, h = self.params()
         pos = pg.mouse.get_pos()
         if in_rect(Point(pos), x, y, w, h) and channel and sound and playing:
             channel.play(sound)
         return in_rect(Point(pos), x, y, w, h)
 
-    def imgUpdate(self):
+    def img_update(self):
         if self.img:
             if self.size > self.original_size:
                 self.img = self.bigger_img
@@ -55,6 +51,6 @@ class Button:
         if self.text:
             text_out(surface, self.text, self.size, self.col, self.pos)
         elif self.img:
-            self.imgUpdate()
+            self.img_update()
             img_w, img_h = self.img.get_rect().size
             surface.blit(self.img, (self.pos[0] - img_w / 2, self.pos[1] - img_h / 2))
