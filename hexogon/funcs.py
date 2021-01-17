@@ -26,25 +26,25 @@ class Point:
         return (x for x in (self.x, self.y))
 
 
-def triangle_s(A, B, C):
-    a = C.dist(B)
-    b = A.dist(C)
-    c = A.dist(B)
+def triangle_s(a1, b1, c1):
+    a = c1.dist(b1)
+    b = a1.dist(c1)
+    c = a1.dist(b1)
     p = (a + b + c) / 2
     return sqrt(p * (p - a) * (p - b) * (p - c))
 
 
 def in_hex(pos, x, y, a):
-    P = Point(pos)
+    point = Point(pos)
     points = [(x + a, y), (x + a / 2, y + a * sqrt(3) / 2),
               (x - a / 2, y + a * sqrt(3) / 2), (x - a, y),
               (x - a / 2, y - a * sqrt(3) / 2), (x + a / 2, y - a * sqrt(3) / 2)]
     points = list(map(Point, points))
     sum = 0
     for i in range(-1, 5):
-        sum += triangle_s(points[i], points[i + 1], P)
-    S = a * a * 3 * sqrt(3) / 2
-    return abs(S - sum) < EPS
+        sum += triangle_s(points[i], points[i + 1], point)
+    square = a * a * 3 * sqrt(3) / 2
+    return abs(square - sum) < EPS
 
 
 def in_rect(pos, x, y, w, h):
@@ -70,13 +70,13 @@ def in_bounds(v, w, h):
 def check_move(start, grid, exit, player):
     w = len(grid[0])
     h = len(grid)
-    Q = deque()
-    Q.append(start)
+    queue = deque()
+    queue.append(start)
     used = [[False for _ in range(w)] for __ in range(h)]
     moves = [Point(1, 0), Point(1, -1), Point(0, 1),
              Point(0, -1), Point(-1, 1), Point(-1, 0)]
-    while len(Q):
-        cur = Q[-1]
+    while len(queue):
+        cur = queue[-1]
         if exit(cur):
             return True
         used[cur.X][cur.Y] = True
@@ -85,11 +85,11 @@ def check_move(start, grid, exit, player):
             other = cur + m
             if (in_bounds(other, w, h) and not used[other.X][other.Y]) \
                     and grid[other.X][other.Y] == player:
-                Q.append(other)
+                queue.append(other)
                 flag = True
                 break
         if not flag:
-            Q.pop()
+            queue.pop()
     return False
 
 
