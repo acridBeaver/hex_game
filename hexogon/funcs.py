@@ -1,7 +1,7 @@
 import pygame as pg
 from math import sqrt, hypot
 from collections import deque
-from consts import *
+from hexogon.consts import *
 
 
 class Point:

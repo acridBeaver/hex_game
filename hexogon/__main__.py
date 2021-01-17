@@ -1,5 +1,5 @@
-from hexogon.Game import *
-from consts import *
+from hexogon.game import *
+from hexogon.consts import *
 
 if __name__ == '__main__':
     game = Game(SIZE)

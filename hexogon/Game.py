@@ -1,5 +1,5 @@
 from pathlib import Path
-from hexogon.Button import *
+from hexogon.button import *
 
 
 class Game:
