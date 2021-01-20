@@ -38,7 +38,8 @@ def in_hex(pos, x, y, a):
     point = Point(pos)
     points = [(x + a, y), (x + a / 2, y + a * sqrt(3) / 2),
               (x - a / 2, y + a * sqrt(3) / 2), (x - a, y),
-              (x - a / 2, y - a * sqrt(3) / 2), (x + a / 2, y - a * sqrt(3) / 2)]
+              (x - a / 2, y - a * sqrt(3) / 2),
+              (x + a / 2, y - a * sqrt(3) / 2)]
     points = list(map(Point, points))
     sum = 0
     for i in range(-1, 5):

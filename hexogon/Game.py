@@ -32,8 +32,8 @@ class Game:
         for r in range(self.size):
             for c in range(self.size):
                 x, y = self.coords(r, c)
-                if in_hex(pos, x, y, self.tile_size) and self.state[r][c] != 2 \
-                        and self.state[r][c] != 1:
+                if in_hex(pos, x, y, self.tile_size) \
+                        and self.state[r][c] != 2 and self.state[r][c] != 1:
                     self.state[r][c] = self.move
                     self.move = 3 - self.move
 
@@ -43,7 +43,8 @@ class Game:
                 x, y = self.coords(r, c)
                 if self.state[r][c] == 0 and in_hex(pos, x, y, self.tile_size):
                     self.state[r][c] = self.move + 2
-                elif self.state[r][c] > 2 and not in_hex(pos, x, y, self.tile_size):
+                elif self.state[r][c] > 2 \
+                        and not in_hex(pos, x, y, self.tile_size):
                     self.state[r][c] = 0
 
     def show_grid(self):
